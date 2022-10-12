@@ -5,7 +5,7 @@
 1. Sarvesh Biradar (sarvesh2910)
 2. Pranav Dharamthok (Pranav-PSU)
 3. Supreeth Mudduchetty(Supreeth10)
-4. Tejesh VNVS (VnvsTejesh) 
+4. Vuddagiri Naga Venkata Sai Tejesh  (VnvsTejesh) 
 
 ## Language
 We are using Javascript for this as the team members would like to explore Javascript as a server side runtime environment.  
