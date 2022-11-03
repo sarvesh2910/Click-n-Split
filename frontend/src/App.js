@@ -23,6 +23,7 @@
 // }
 
 // export default App;
+import "./App.css";
 import axios from "axios";
 
 import React, { Component } from "react";
@@ -96,14 +97,20 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Click-n-Split</h1>
-        <h3>Upload the picture of the bill</h3>
-        <div>
-          <input type="file" onChange={this.onFileChange} />
-          <button onClick={this.onFileUpload}>Upload!</button>
-        </div>
-        {this.fileData()}
+      <div class="main_div">
+        <header className="App-header">
+          <h1 class="App">Click-n-Split</h1>
+        </header>
+        <body>
+          <main class="App body">
+            <h3>Upload the picture of the bill</h3>
+            <div>
+              <input type="file" onChange={this.onFileChange} />
+              <button onClick={this.onFileUpload}>Upload!</button>
+            </div>
+            {this.fileData()}
+          </main>
+        </body>
       </div>
     );
   }
