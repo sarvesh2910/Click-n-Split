@@ -7,6 +7,9 @@ var multer = require("multer");
 const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
 
 exports.scanReceipt = (req, res) => {
+  let array = [];
+  let arr1 = [];
+  let resp = [];
   if (req.file.path && typeof req.file.path != undefined) {
     const file = fs.createReadStream(req.file.path);
 
@@ -14,7 +17,26 @@ exports.scanReceipt = (req, res) => {
       .extractDocument(queueId, file)
       .then((response) => {
         console.log(response);
-        res.send(response);
+        //res.send(response);
+        let items = response.tables[0].rows;
+
+        items.forEach((ele, ind) => {
+          ele.cells.forEach((ele1, ind1) => {
+            array.push({ name: ele1.columnName, value: ele1.value });
+          });
+          arr1.push(array);
+          array = [];
+        });
+
+        arr1.forEach((ele, ind) => {
+          resp.push({
+            name: ele.find((todo) => todo.name == "Item Name").value,
+            value: ele.find((todo) => todo.name == "Total Price").value,
+            quantity: ele.find((todo) => todo.name == "Quantity").value,
+            unitprice: ele.find((todo) => todo.name == "Unit Price").value,
+          });
+        });
+        res.send(resp);
       })
       .catch((error) => {
         console.log(error);
@@ -38,3 +60,19 @@ exports.imageStorage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
+// items.forEach((ele,ind)=>{
+//   ele.cells.forEach((ele1,ind1)=>{
+//       console.log(ele1)
+//   })
+//   })
+
+// let array=[];
+// let arr1=[];
+// items.forEach((ele,ind)=>{
+// ele.cells.forEach((ele1,ind1)=>{
+//     array.push({"name":ele1.columnName,"value":ele1.value})
+// })
+//     arr1.push(array);
+//     array=[];
+// })

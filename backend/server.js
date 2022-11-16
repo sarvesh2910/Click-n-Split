@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 //express router
 app.use("/clicknsplit/api", router);
 
-//TEST API
+//TEST  API
 app.get("/", function (req, res) {
   res.status(200).send("Hello World!");
 });
