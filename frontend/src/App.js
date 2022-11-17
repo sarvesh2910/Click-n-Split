@@ -20,8 +20,8 @@ class App extends Component {
     );
 
     console.log(this.state.selectedFile);
-
-    fetch("api/uploadfile", {
+    let url = "api/uploadfile";
+    fetch(url, {
       method: "POST",
       body: formData,
     })

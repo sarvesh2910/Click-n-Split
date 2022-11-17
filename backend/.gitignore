@@ -1,0 +1,8 @@
+docs 
+img/
+node_modules/
+.env
+package-lock.json
+.vscode/
+
+
