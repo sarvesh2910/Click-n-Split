@@ -14,19 +14,25 @@ class App extends Component {
     const formData = new FormData();
 
     formData.append(
-      "myFile",
+      "image",
       this.state.selectedFile,
       this.state.selectedFile.name
     );
 
     console.log(this.state.selectedFile);
-    let url = "api/uploadfile";
-    fetch(url, {
+    // let url = "http://localhost:3000";
+    let apiEndpoint = "/clicknsplit/api/upload-receipt";
+    let url = "https://35a4-2601-1c0-5280-e430-104b-5c7f-453-5670.ngrok.io";
+    fetch(url + apiEndpoint, {
       method: "POST",
       body: formData,
     })
       .then((response) => {
-        console.log("Request successful", response);
+        // console.log("Request successful", response.json());
+        return response.json();
+      })
+      .then((res) => {
+        console.log(res);
       })
       .catch((error) => {
         console.log("error message", error);
