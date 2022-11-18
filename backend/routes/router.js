@@ -1,5 +1,6 @@
 const express = require("express");
 const imageController = require("../controllers/imageController");
+const splitController = require("../controllers/splitController");
 const emailController = require("../controllers/emailController");
 const router = express.Router();
 let multer = require("multer");
@@ -14,6 +15,7 @@ router.post(
   imageController.scanReceipt
 );
 
+router.post("/split-bill", splitController.splitBill);
 router.get("/send-email", emailController.sendEmails);
 
 module.exports = router;
