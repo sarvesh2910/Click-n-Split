@@ -1,81 +1,33 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, {Component} from "react";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import homepage from "./Pages/homepage/homepage";
+import TablePage from "./Pages/table/table";
+import upload from "./Pages/upload/upload";
+import Selection from "./Pages/selection/selection";
+import Contri from "./Pages/contribution/contribution";
 
 class App extends Component {
-  state = {
-    selectedFile: null,
-  };
-
-  onFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-  };
-
-  onFileUpload = () => {
-    const formData = new FormData();
-
-    formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    );
-
-    console.log(this.state.selectedFile);
-
-    fetch("api/uploadfile", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        console.log("Request successful", response);
-      })
-      .catch((error) => {
-        console.log("error message", error);
-      });
-  };
-
-  fileData = () => {
-    if (this.state.selectedFile) {
-      return (
-        <div>
-          <h2>File Details:</h2>
-
-          <p>File Name: {this.state.selectedFile.name}</p>
-
-          <p>File Type: {this.state.selectedFile.type}</p>
-
-          <p>
-            Last Modified:{" "}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
-        </div>
-      );
+    render() {
+        return (
+            <Router>
+                <div className="main_div">
+                    <header className="App-header">
+                        <h1 className="App">Click-n-Split</h1>
+                    </header>
+                    <main>
+                        <Route path="/" exact component={homepage}/>
+                        <Route path="/upload" exact component={upload}/>
+                        <Route path="/review" exact component={TablePage}/>
+                        <Route path="/selection" exact component={Selection}/>
+                        <Route path="/contri" exact component={Contri}/>
+                    </main>
+                    <main className="App">
+                    </main>
+                </div>
+            </Router>
+        );
     }
-  };
-
-  render() {
-    return (
-      <div className="main_div">
-        <header className="App-header">
-          <h1 className="App">Click-n-Split</h1>
-        </header>
-        <main className="App">
-          <h3>Upload the picture of the bill</h3>
-          <div>
-            <input type="file" onChange={this.onFileChange} />
-            <button onClick={this.onFileUpload}>Upload!</button>
-          </div>
-          {this.fileData()}
-        </main>
-      </div>
-    );
-  }
 }
 
 export default App;

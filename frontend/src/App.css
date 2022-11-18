@@ -5,3 +5,8 @@
 .App {
   text-align: center;
 }
+
+table,th,tr,td{
+  border: 1px solid black;
+  padding: 4px;
+}
