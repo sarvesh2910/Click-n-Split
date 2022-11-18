@@ -36,6 +36,7 @@ exports.scanReceipt = (req, res) => {
             unitprice: ele.find((todo) => todo.name == "Unit Price").value,
           });
         });
+        console.log(resp);
         res.send(resp);
       })
       .catch((error) => {
@@ -60,19 +61,3 @@ exports.imageStorage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
-// items.forEach((ele,ind)=>{
-//   ele.cells.forEach((ele1,ind1)=>{
-//       console.log(ele1)
-//   })
-//   })
-
-// let array=[];
-// let arr1=[];
-// items.forEach((ele,ind)=>{
-// ele.cells.forEach((ele1,ind1)=>{
-//     array.push({"name":ele1.columnName,"value":ele1.value})
-// })
-//     arr1.push(array);
-//     array=[];
-// })
