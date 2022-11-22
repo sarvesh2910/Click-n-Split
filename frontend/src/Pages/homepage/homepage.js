@@ -22,7 +22,7 @@ function Homepage(props) {
         for (let i = 0; i < numberOfPeople; i++) {
             temp.push(<div key={i}>
                 <span>{i + 1}</span>
-                <input key={i} type="text" onChange={(e) => {
+                <input key={i} type="text" value={personName[i]} onChange={(e) => {
                     onPersonChange(e, i)
                 }}/>
             </div>)
@@ -54,8 +54,6 @@ function Homepage(props) {
                     </button>
                 </Link>
             </div>}
-
-
         </div>
     );
 }

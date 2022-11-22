@@ -1,13 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Table} from "../table/table";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 
 function Selection(props) {
     const [tableData, setTableData] = useState([])
     const [personsList, setPersonsList] = useState([])
     const [currentIndividual, setCurrentIndividual] = useState(null)
-    const [tempData, setTempData] = useState({})
-    const [items, setItems] = useState([])
+    const [selectionData, setSelectionData] = useState({})
 
     const getTotalBillAmount = () => {
         let total = 0
@@ -17,13 +14,6 @@ function Selection(props) {
         return total
     }
 
-    const getAllItems = () => {
-        let items = []
-        tableData.forEach(item => {
-            items.push(item)
-        })
-        return items
-    }
 
     const getColumns = () => {
         let temp = []
@@ -50,8 +40,16 @@ function Selection(props) {
                 {value}
             </td>);
         }
-        currentIndividual && temp.push(<input onChange={onCheckboxChange} id={row.name} name={row.name}
-                                              data_total_value={row.value} checked={true} type="checkbox"/>)
+        currentIndividual &&
+        temp.push(<td>
+                <input
+                    onChange={onCheckboxChange}
+                    id={`${row.name}${currentIndividual}`} name={row.name}
+                    data_total_value={row.value}
+                    checked={!!selectionData?.[`${row.name}`]?.people_involved.includes(currentIndividual)}
+                    type="checkbox"/>
+            </td>
+        )
         return temp
     }
 
@@ -70,7 +68,10 @@ function Selection(props) {
             <tr>
                 {buildColumns()}
             </tr>
+            <tbody>
             {buildRows()}
+
+            </tbody>
         </table>
     }
 
@@ -80,22 +81,25 @@ function Selection(props) {
             totalBillAmount: getTotalBillAmount(),
             data: []
         }
-        tableData.forEach(row => {
-            let tempItemData = {
-                people_involved: personsList,
-                itemName: row.name,
-                price: row['unitprice'],
-            }
-            temp.data.push(tempItemData)
-        })
+
+        for (const [itemName, itemSelectionData] of Object.entries(selectionData)) {
+            temp.data.push({
+                itemName,
+                'people_involved': itemSelectionData['people_involved'],
+                'price': itemSelectionData['price'],
+                'people_count': itemSelectionData['people_involved'].length
+            })
+
+        }
+
         console.log(temp);
-        fetch('https://e771-2601-1c0-5280-e430-91ba-e420-325e-316e.ngrok.io/clicknsplit/api/split-bill', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(temp)
-        }).then((data) => data.json()).then(data => {
-            console.log(data);
-        })
+        // fetch('https://e771-2601-1c0-5280-e430-91ba-e420-325e-316e.ngrok.io/clicknsplit/api/split-bill', {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify(temp)
+        // }).then((data) => data.json()).then(data => {
+        //     console.log(data);
+        // })
     }
 
     const onIndividualChange = (e) => {
@@ -103,39 +107,33 @@ function Selection(props) {
     }
 
     const onCheckboxChange = e => {
-        let data = tempData
+        let data = Object.assign({}, selectionData)
         const {name, checked} = e.target
         const totalValue = e.target.getAttribute("data_total_value")
-        if (data.name) {
+        if (data[name]) {
             console.log('old');
             if (!checked) {
                 //remove
+                data[name].people_involved = data[name].people_involved.filter(item => item !== currentIndividual)
             } else {
                 //add
-                data.name.people_involved = data.name.people_involved.push(currentIndividual)
+                data[name].people_involved = [...data[name].people_involved, currentIndividual]
             }
         } else {
-            console.log('new');
+            // console.log('new');
             data[name] = {
                 people_involved: [currentIndividual],
                 price: totalValue,
             }
         }
-        setTempData(data)
-    }
-
-    const calculateCheckBoxValue = (item, person) => {
-        console.log(item);
-        console.log(tempData);
-        // console.log(item, person,tempData?.item?.people_involved.includes(person));
-        return tempData?.item?.people_involved.includes(person)
+        console.log(data);
+        setSelectionData(data)
     }
 
     useEffect(() => {
         setTableData(JSON.parse(localStorage.getItem('tableData')))
         setPersonsList(JSON.parse(localStorage.getItem('personNames')))
     }, [])
-
 
     return (
         <div>

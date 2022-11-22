@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 
-
-
 function TablePage() {
     const [data, setData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false);
