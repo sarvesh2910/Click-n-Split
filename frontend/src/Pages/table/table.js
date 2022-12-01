@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
+import image from "../../img/bill.jpg";
 function TablePage() {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [rows, setRows] = useState([]);
   const [col, setCol] = useState([]);
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("tableData"))
+    let data = JSON.parse(localStorage.getItem("tableData"));
     setData(data);
     setIsLoaded(true);
     // fetch("https://jsonplaceholder.typicode.com/todos/1")
@@ -77,7 +77,7 @@ function TablePage() {
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          // backgroundImage: `url(${backGroundImg})`,
+          backgroundImage: `url(${image})`,
           height: "500px",
         }}></div>
       <div
@@ -103,7 +103,6 @@ function TablePage() {
                   <button className="btn btn-info btn-sml">{`Done! >`}</button>
                 </Link>
               </div>
-
             </div>
           </div>
         </div>

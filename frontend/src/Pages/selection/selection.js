@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
-import {useHistory} from "react-router";
+import image from "../../img/bill.jpg";
+import { useHistory } from "react-router";
 
 function Selection(props) {
   const [tableData, setTableData] = useState([]);
@@ -10,8 +10,9 @@ function Selection(props) {
   let history = useHistory();
   const getTotalBillAmount = () => {
     let total = 0;
+    let regexcurrency = /[^0-9.-]/gm;
     tableData.forEach((item) => {
-      total = total + parseInt(item["value"], 10);
+      total = total + parseInt(item["value"].replace(regexcurrency, ""), 10);
     });
     return total;
   };
@@ -88,15 +89,20 @@ function Selection(props) {
     }
 
     console.log(temp);
-    fetch('https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io/clicknsplit/api/split-bill', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(temp)
-    }).then((data) => data.json()).then(data => {
-        localStorage.setItem('shares',JSON.stringify(data))
-      history.push('/contri')
+    fetch(
+      "https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io/clicknsplit/api/split-bill",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(temp),
+      }
+    )
+      .then((data) => data.json())
+      .then((data) => {
+        localStorage.setItem("shares", JSON.stringify(data));
+        history.push("/contri");
         console.log(data);
-    })
+      });
   };
 
   const onIndividualChange = (e) => {
@@ -160,7 +166,7 @@ function Selection(props) {
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          // backgroundImage: `url(${backGroundImg})`,
+          backgroundImage: `url(${image})`,
           height: "500px",
         }}></div>
       <div
