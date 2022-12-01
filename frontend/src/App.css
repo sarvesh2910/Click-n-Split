@@ -13,11 +13,22 @@ td {
   border: 1px solid black;
   padding: 4px;
 }
+.buttonTable a{
+  margin: 0 10px;
+}
+.userName{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userName h4{
+  margin-bottom: 0;
+}
 .buttonTable a {
   margin: 0 10px;
 }
 .personBlock {
-  min-width: 400px;
+  min-width: 420px;
   text-transform: capitalize;
   border: 1px solid #444444;
   padding: 16px;
@@ -45,4 +56,16 @@ td {
   font-weight: bold;
   border-radius: 12px;
   padding: 0 8px;
+}
+.sendEmail{
+  width: 100px;
+  border-radius: 16px;
+  border: 1px solid;
+  margin: 10px 10px;
+}
+.emailInput{
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-right: 10px;
+  border: 1px solid;
 }
