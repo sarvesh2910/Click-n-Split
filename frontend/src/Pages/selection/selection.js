@@ -89,14 +89,11 @@ function Selection(props) {
     }
 
     console.log(temp);
-    fetch(
-      "https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io/clicknsplit/api/split-bill",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(temp),
-      }
-    )
+    fetch("http://localhost:3001/clicknsplit/api/split-bill", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(temp),
+    })
       .then((data) => data.json())
       .then((data) => {
         localStorage.setItem("shares", JSON.stringify(data));

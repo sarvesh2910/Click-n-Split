@@ -50,7 +50,7 @@ function Homepage(props) {
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          // backgroundImage: `url(${image})`,
+          backgroundImage: `url(${image})`,
           height: "500px",
         }}></div>
       <div
