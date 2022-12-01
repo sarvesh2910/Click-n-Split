@@ -7,7 +7,8 @@ function TablePage() {
   const [rows, setRows] = useState([]);
   const [col, setCol] = useState([]);
   useEffect(() => {
-    setData(JSON.parse(localStorage.getItem("tableData")));
+    let data = JSON.parse(localStorage.getItem("tableData"))
+    setData(data);
     setIsLoaded(true);
     // fetch("https://jsonplaceholder.typicode.com/todos/1")
     // .then(res => res.json())
@@ -94,9 +95,15 @@ function TablePage() {
               {isLoaded && buildTable()}
             </div>
             <div className="row mt-3">
-              <Link to={"selection"}>
-                <button className="btn btn-info btn-sml">Done!</button>
-              </Link>
+              <div className="buttonTable">
+                <Link to={"upload"}>
+                  <button className="btn btn-info btn-sml">{`< Retry`}</button>
+                </Link>
+                <Link to={"selection"}>
+                  <button className="btn btn-info btn-sml">{`Done! >`}</button>
+                </Link>
+              </div>
+
             </div>
           </div>
         </div>

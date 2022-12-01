@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
+// import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
 
 function Selection(props) {
   const [tableData, setTableData] = useState([]);
@@ -87,13 +87,14 @@ function Selection(props) {
     }
 
     console.log(temp);
-    // fetch('https://e771-2601-1c0-5280-e430-91ba-e420-325e-316e.ngrok.io/clicknsplit/api/split-bill', {
-    //     method: 'POST',
-    //     headers: {'Content-Type': 'application/json'},
-    //     body: JSON.stringify(temp)
-    // }).then((data) => data.json()).then(data => {
-    //     console.log(data);
-    // })
+    fetch('https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io/clicknsplit/api/split-bill', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(temp)
+    }).then((data) => data.json()).then(data => {
+        localStorage.setItem('shares',JSON.stringify(data))
+        console.log(data);
+    })
   };
 
   const onIndividualChange = (e) => {
@@ -152,13 +153,12 @@ function Selection(props) {
     //         Done
     //     </button>
     //     {/*</Link>*/}
-
     // </div>
     <section className="text-center">
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          backgroundImage: `url(${backGroundImg})`,
+          // backgroundImage: `url(${backGroundImg})`,
           height: "500px",
         }}></div>
       <div
