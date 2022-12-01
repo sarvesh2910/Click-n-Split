@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
+import {useHistory} from "react-router";
 
 function Selection(props) {
   const [tableData, setTableData] = useState([]);
   const [personsList, setPersonsList] = useState([]);
   const [currentIndividual, setCurrentIndividual] = useState(null);
   const [selectionData, setSelectionData] = useState({});
-
+  let history = useHistory();
   const getTotalBillAmount = () => {
     let total = 0;
     tableData.forEach((item) => {
@@ -93,6 +94,7 @@ function Selection(props) {
         body: JSON.stringify(temp)
     }).then((data) => data.json()).then(data => {
         localStorage.setItem('shares',JSON.stringify(data))
+      history.push('/contri')
         console.log(data);
     })
   };

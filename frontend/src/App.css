@@ -10,3 +10,35 @@ table,th,tr,td{
   border: 1px solid black;
   padding: 4px;
 }
+.buttonTable a{
+  margin: 0 10px;
+}
+.personBlock{
+  min-width: 400px;
+  text-transform: capitalize;
+  border: 1px solid #444444;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contriPage{
+  margin: 16px;
+}
+.sharePrice{
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+.contriItem{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sharePrice {
+  background: #e7e7e7;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 0 8px;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
+// import backGroundImg from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
 function TablePage() {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -77,7 +77,7 @@ function TablePage() {
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          backgroundImage: `url(${backGroundImg})`,
+          // backgroundImage: `url(${backGroundImg})`,
           height: "500px",
         }}></div>
       <div

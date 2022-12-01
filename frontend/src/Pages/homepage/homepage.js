@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
+// import image from "/Users/supreeth_mudduchetty/workspace/SE_Project/Click-n-Split/frontend/src/Pages/homepage/bill.jpg";
 //correct path needs to be put above
 
 function Homepage(props) {
@@ -50,7 +50,7 @@ function Homepage(props) {
       <div
         className="p-5 bg-image img-fluid"
         style={{
-          backgroundImage: `url(${image})`,
+          // backgroundImage: `url(${image})`,
           height: "500px",
         }}></div>
       <div
