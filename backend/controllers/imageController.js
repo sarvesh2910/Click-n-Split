@@ -8,7 +8,7 @@ const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
 
 exports.scanReceipt = (req, res) => {
   let array = [];
-  let arr1 = [];
+  let arrayTemprory = [];
   let resp = [];
   if (req.file.path && typeof req.file.path != undefined) {
     const file = fs.createReadStream(req.file.path);
@@ -24,16 +24,16 @@ exports.scanReceipt = (req, res) => {
           ele.cells.forEach((ele1, ind1) => {
             array.push({ name: ele1.columnName, value: ele1.value });
           });
-          arr1.push(array);
+          arrayTemprory.push(array);
           array = [];
         });
 
-        arr1.forEach((ele, ind) => {
+        arrayTemprory.forEach((ele, ind) => {
           resp.push({
             name: ele.find((todo) => todo.name == "Item Name").value,
-            value: ele.find((todo) => todo.name == "Total Price").value,
             quantity: ele.find((todo) => todo.name == "Quantity").value,
-            unitprice: ele.find((todo) => todo.name == "Unit Price").value,
+            // unitprice: ele.find((todo) => todo.name == "Unit Price").value,
+            value: ele.find((todo) => todo.name == "Total Price").value,
           });
         });
         console.log(resp);

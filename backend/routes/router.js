@@ -16,6 +16,6 @@ router.post(
 );
 
 router.post("/split-bill", splitController.splitBill);
-router.get("/send-email", emailController.sendEmails);
+router.post("/send-email", emailController.sendEmails);
 
 module.exports = router;

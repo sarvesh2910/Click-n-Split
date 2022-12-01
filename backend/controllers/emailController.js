@@ -1,7 +1,7 @@
 exports.sendEmails = (req, res) => {
   let email = req.body.email;
-  let text = req.body.text;
-  let subject = req.body.subject;
+  let text = req.body.string;
+  let subject = "Your Purchase Today";
 
   var nodemailer = require("nodemailer");
   var transporter = nodemailer.createTransport({

@@ -65,9 +65,10 @@ exports.splitBill = (req, res) => {
   }
 
   let price = 0;
-
+  let regexcurrency = /[^0-9.-]/gm;
   items.forEach((element) => {
-    price = element.price / element.people_involved.length;
+    let amount = element.price.replace(regexcurrency, "");
+    price = amount / element.people_involved.length;
 
     for (var j = 0; j < element.people_involved.length; j++) {
       for (var k = 0; k < obj.length; k++) {
@@ -78,5 +79,6 @@ exports.splitBill = (req, res) => {
       }
     }
   });
-  res.send(obj);
+  console.log(obj);
+  res.status(200).send(obj);
 };
