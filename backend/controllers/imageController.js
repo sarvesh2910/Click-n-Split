@@ -37,7 +37,7 @@ exports.scanReceipt = (req, res) => {
           });
         });
         console.log(resp);
-        res.send(resp);
+        res.status(200).send(resp);
       })
       .catch((error) => {
         console.log(error);
