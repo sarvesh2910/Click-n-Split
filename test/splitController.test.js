@@ -63,9 +63,9 @@ describe("Post request to SplitBill function", () => {
       .end((err, res) => {
         should.exist(res.status);
         res.should.have.status(200);
-        res.body.length.should.be.eql(5);
         res.body.should.be.a("array");
         done();
       });
   });
+
 });
