@@ -73,6 +73,6 @@ test("check if bill is split right", () => {
   items.forEach((element) => {
     calAmount = calAmount + element.price;
   });
-  // expect(CalShare(items, No_of_People)).toMatchObject(response);
+  expect(CalShare(items, No_of_People)).toMatchObject(response);
   expect(calAmount).toBe(amt);
 });
