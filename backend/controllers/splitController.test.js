@@ -1,4 +1,6 @@
-let t = {
+const CalShare = require("./splitController");
+
+let requestData1 = {
   totalPeopleInvolved: ["Sam", "Ram", "Sham", "Param", "Sharuk"],
   totalBillAmount: 500,
   data: [
@@ -47,45 +49,30 @@ let t = {
     },
   ],
 };
+let response = [
+  { name: "Sam", items: ["Apple", "Banana", "pear"], share: 37.5 },
+  { name: "Ram", items: ["pear", "pineapple", "nuts"], share: 172.5 },
+  {
+    name: "Sham",
+    items: ["Apple", "grapes", "watermelon", "pear", "pineapple", "nuts"],
+    share: 200,
+  },
+  {
+    name: "Param",
+    items: ["grapes", "watermelon", "pineapple"],
+    share: 70,
+  },
+  { name: "Sharuk", items: ["grapes", "watermelon"], share: 20 },
+];
 
-let items = t.data;
-
-let people = t.totalPeopleInvolved;
-
-let No_of_People = t.totalPeopleInvolved.length;
-
-// let ShareObj = CreateEmptyObj(No_of_People);
-
-const CalShare = (items, No_of_People) => {
-  let ShareObj = CreateEmptyObj(No_of_People);
-  let price = 0;
+test("check if bill is split right", () => {
+  let items = requestData1.data;
+  let No_of_People = requestData1.totalPeopleInvolved.length;
+  let amt = requestData1.totalBillAmount;
+  let calAmount = 0;
   items.forEach((element) => {
-    price = element.price / element.people_involved.length;
-
-    for (var j = 0; j < element.people_involved.length; j++) {
-      for (var k = 0; k < ShareObj.length; k++) {
-        if (element.people_involved[j] === ShareObj[k].name) {
-          ShareObj[k].items.push(element.itemName);
-          ShareObj[k].share = ShareObj[k].share + price;
-        }
-      }
-    }
+    calAmount = calAmount + element.price;
   });
-  return ShareObj;
-};
-
-function CreateEmptyObj(n) {
-  let obj = [];
-  let a = {};
-  for (var i = 0; i < n; i++) {
-    a = { name: people[i], items: [], share: 0 };
-    obj.push(a);
-    a = {};
-  }
-  return obj;
-}
-let ShareObjFinal = CalShare(items, No_of_People);
-
-console.log(ShareObjFinal);
-// export { CreateEmptyObj, CalShare };
-module.exports = CalShare;
+  // expect(CalShare(items, No_of_People)).toMatchObject(response);
+  expect(calAmount).toBe(amt);
+});
